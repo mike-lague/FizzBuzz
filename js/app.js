@@ -1,42 +1,33 @@
 $(document).ready(function() {
   
-  $('#newitembutton').click(function() {
-  	addnewitem($("#newitem"));
+  $('#doit').click(function(event) {
+    printFizzBuzz(100);
   });
 
-  $('#shopping-table').on("mouseenter", ".shopping-row", (function() {
-    setrowtext(this, checkmark, deletemark);
-  }));
-
-  $('#shopping-table').on("mouseleave", ".shopping-row", (function() {
-  	setrowtext(this, "", "");
-  }));
-
-  $('#shopping-table').on( "click", ".xmark", (function() {
-  	$(this).closest("tr").remove();
-  }));
-
-  $('#shopping-table').on("click", ".check", (function() {
-  	//console.log('clicked checkmark');
-  	$(this).closest("tr").find(".shopping-item").toggleClass("bought-item");
-  }));
-  
 });
 
-var checkmark = "&#x2714";
-var deletemark = "&#x2716";
-
-function setrowtext(row, checktext, xtext) {
-	$(row).find(".check").html(checktext);
-	$(row).find(".xmark").html(xtext);
+function printFizzBuzz(limit) {
+  console.log("Called FizzBuzz");
+  var output = "";
+  for (i = 1; i <= limit; i++) {
+    output += "<p>" + fizzBuzz(i) + "<\p>";
+  }
+  $('#solution').html(output);
 }
 
-function addnewitem(input) {
-	htmltext = '<tr class="shopping-row">' +
-				'<td class="check"/>' +
-				'<td class="shopping-item">' + $(input).val() + '</td>' +
-				'<td class="xmark"/>' +
-				'</tr>' ;
-	$(".shopping-table").append(htmltext);
-	$(input).val("");
+function fizzBuzz(i) {
+  
+  var output = "";
+
+  if (i % 3 == 0) {
+    output += "fizz";
+  }
+  if (i % 5 == 0) {
+    output += "buzz";
+  }
+  if (!output) {
+    output += i;
+  }
+  
+  return (output);
 }
