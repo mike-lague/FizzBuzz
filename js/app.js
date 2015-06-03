@@ -1,16 +1,25 @@
 $(document).ready(function() {
   
   $('#doit').click(function(event) {
-    printFizzBuzz(100);
+    var limitstr = $("#newlimit").val();
+    var limit = getFizzBuzzLimit(limitstr);
+    if (limit) {
+      printFizzBuzz(limit);
+    } else {
+      alert("'" + limitstr + "'" + " is not a good limit.\n" +
+            "Please enter a positive decimal whole number.");
+      $("#newlimit").val("");
+    }
+    
   });
 
 });
 
 function printFizzBuzz(limit) {
-  console.log("Called FizzBuzz");
+  // console.log("Called FizzBuzz");
   var output = "";
   for (i = 1; i <= limit; i++) {
-    output += "<p>" + fizzBuzz(i) + "<\p>";
+    output += "<pre>" + fizzBuzz(i) + "<\pre>";
   }
   $('#solution').html(output);
 }
@@ -30,4 +39,13 @@ function fizzBuzz(i) {
   }
   
   return (output);
+}
+
+function getFizzBuzzLimit(lstr) {
+  var n = parseInt(lstr, 10);
+  if (n > 0 && lstr % 1 == 0) {
+    return n;
+  } else {
+    return NaN;
+  }
 }
